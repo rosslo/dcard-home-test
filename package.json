@@ -11,13 +11,13 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.4",
     "node-sass": "^4.11.0",
-    "opn": "^5.4.0",
+    "opn-cli": "^4.0.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3"
   },
   "scripts": {
-    "start": "npm run build && node ./server/start.js && opn 'http://localhost:8030'",
+    "start": "npm run build && opn http://localhost:8030 && node ./server/start.js",
     "dev": "concurrently --kill-others \"react-scripts start\" \"yarn server\"",
     "build": "react-scripts build",
     "server": "supervisor -w ./server ./server/start.js"
