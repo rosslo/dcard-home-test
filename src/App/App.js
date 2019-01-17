@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { capitalizeFirstLetter, dateFormater } from '../utils/format';
 import ApiClient from '../helpers/ApiClient';
 import Modal from '../Modal/Modal';
-import './App.scss';
 
 class App extends Component {
   constructor(props) {
@@ -26,8 +25,8 @@ class App extends Component {
 
   sort(data) {
     return data.sort((a, b) => {
-      const keyA1 = a.like - a.dislike;
-      const keyB1 = b.like - b.dislike;
+      const keyA1 = a.like;
+      const keyB1 = b.like;
       const keyA2 = a.date;
       const keyB2 = b.date;
 
