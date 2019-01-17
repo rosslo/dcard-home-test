@@ -1,0 +1,37 @@
+{
+  "name": "dcard-home-test",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "app-module-path": "^2.2.0",
+    "axios": "^0.18.0",
+    "babel-preset-env": "^1.7.0",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.4",
+    "node-sass": "^4.11.0",
+    "opn": "^5.4.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-scripts": "2.1.3"
+  },
+  "scripts": {
+    "start": "npm run build && node ./server/start.js && opn 'http://localhost:8030'",
+    "dev": "concurrently --kill-others \"react-scripts start\" \"yarn server\"",
+    "build": "react-scripts build",
+    "server": "supervisor -w ./server ./server/start.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  }
+}
