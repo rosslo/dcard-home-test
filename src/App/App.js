@@ -18,10 +18,6 @@ class App extends Component {
     ['title', 'content'].forEach(value => {
       this[`handleChange${capitalizeFirstLetter(value)}`] = this.handleChange(value);
     });
-
-    ['like', 'dislike'].forEach(value => {
-      this[`handle${capitalizeFirstLetter(value)}`] = this.updateLike(value);
-    })
   }
 
   componentDidMount() {
@@ -95,26 +91,11 @@ class App extends Component {
     });
   }
 
-  // handleLike = (e) => {
-  //   const { id, like } = e.target.dataset;
-  //   const key = like ? 'like' : 'dislike';
-
-  //   console.log('handleLike', e.target, 'id', id, 'like', like);
-
-  //   ApiClient.PATCH(`/article/${id}/${key}`).then(
-  //     () => {
-  //       this.updateLike(id, key);
-  //     }, (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }
-
-  updateLike = (key) => (e) => {
+  handleLike = (e) => {
     const { id, value } = e.target.dataset;
     const newValue = parseInt(value, 10) + 1;
     const data = {
-      [key]: newValue
+      like: newValue
     };
 
     ApiClient.PATCH(`/article/${id}`, {
@@ -123,7 +104,7 @@ class App extends Component {
       () => {
         const newArticles = this.state.articles.slice();
         const article = newArticles.find(value => value._id === id);
-        article[key] = newValue;
+        article.like = newValue;
 
         this.setState({
           articles: this.sort(newArticles)
@@ -138,7 +119,7 @@ class App extends Component {
     const { articles } = this.state;
 
     return articles.map(value => {
-      const { _id, title, date, content, like, dislike } = value;
+      const { _id, title, date, content, like } = value;
       return (
         <div key={_id} className="article">
           <div className="title">
@@ -146,24 +127,14 @@ class App extends Component {
             <span className="date">{dateFormater(date)}</span>
           </div>
           <div className="content">{content}</div>
-          <div className="like-container">
-            <span
-              className="btn like-btn"
-              data-id={_id}
-              data-value={like}
-              onClick={this.handleLike}
-            >
-              Like {like}
-            </span>
-            <span
-              className="btn dislike-btn"
-              data-id={_id}
-              data-value={dislike}
-              onClick={this.handleDislike}
-            >
-              Dislike {dislike}
-            </span>  
-          </div>
+          <span
+            className="btn like-btn"
+            data-id={_id}
+            data-value={like}
+            onClick={this.handleLike}
+          >
+            Like {like}
+          </span>
         </div>
       )
     });
